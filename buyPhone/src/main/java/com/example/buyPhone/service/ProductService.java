@@ -12,8 +12,14 @@ public class ProductService {
     private long ID;
 
     {
-        products.add(new Product(++ID,"Samsung", "s001", 500));
-        products.add(new Product(++ID,"Apple", "Iphone12",1000));
+        products.add(new Product(++ID,"Samsung", "S-001", 500));
+        products.add(new Product(++ID,"Apple", "Iphone 12",1000));
+        products.add(new Product(++ID,"Samsung", "Q-001", 400));
+        products.add(new Product(++ID,"Apple", "Iphone 13",900));
+        products.add(new Product(++ID,"Samsung", "M-956", 600));
+        products.add(new Product(++ID,"Apple", "Iphone 14",1000));
+        products.add(new Product(++ID,"Samsung", "Q-001", 400));
+        products.add(new Product(++ID,"Apple", "Iphone 15",900));
     }
     public List<Product> findByAll(){
         return products;
@@ -29,6 +35,18 @@ public class ProductService {
             }
         }
         return null;
+    }
+    public void updateProduct(Long id, Product product){
+        for(Product pr : products){
+            if(pr.getId().equals(id)){
+                pr.setCompany(product.getCompany());
+                pr.setModel(product.getModel());
+                pr.setPrice(product.getPrice());
+                return;
+
+            }
+        }
+
     }
     public void deleteProduct(Long id){
         products.removeIf(product -> product.getId().equals(id));

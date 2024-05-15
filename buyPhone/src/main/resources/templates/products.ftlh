@@ -5,10 +5,10 @@
 </head>
 <body>
 <h1>BuyPhone</h1>
-<h4>Мщдели в наличии</h4><hr>
+<h4>Мoдели в наличии</h4><hr>
 <#list products as product>
     <div>
-        <p><b>${product.company}</b>${product.model} ${product.price} | <a href="/product/${product.id}">INFO...</a></p>
+        <p>${product.id} <b>${product.company}</b>  ${product.model} ${product.price} | <a href="/product/${product.id}">INFO...</a></p>
     </div>
 </#list>
 <hr>
