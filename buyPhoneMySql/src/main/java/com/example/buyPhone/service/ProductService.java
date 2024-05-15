@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -15,36 +16,23 @@ import java.util.List;
 public class ProductService {
     private final ProductRepository productRepository;
 
-    private List<Product> products = new ArrayList<>();
+
 
     public List<Product> findByAll(){
-        return products;
+        return productRepository.findAll();
     }
+
+
     public void saveProduct(Product product){
-        product.setId(++ID);
-        products.add(product);
+       log.info("Saving product", product);
+        productRepository.save(product);
     }
-    public Product getById(long id){
-        for(Product product : products){
-            if(product.getId().equals(id)){
-                return product;
-            }
-        }
-        return null;
+    public  Product getById(long id){
+       return productRepository.findById(id).orElse(null);
     }
-    public void updateProduct(Long id, Product product){
-        for(Product pr : products){
-            if(pr.getId().equals(id)){
-                pr.setCompany(product.getCompany());
-                pr.setModel(product.getModel());
-                pr.setPrice(product.getPrice());
-                return;
 
-            }
-        }
-
-    }
     public void deleteProduct(Long id){
-        products.removeIf(product -> product.getId().equals(id));
+
+        productRepository.deleteById(id);
     }
 }
