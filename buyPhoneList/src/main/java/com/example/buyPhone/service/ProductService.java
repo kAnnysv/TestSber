@@ -1,12 +1,14 @@
 package com.example.buyPhone.service;
 
 import com.example.buyPhone.models.Product;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ProductService {
     private List<Product> products = new ArrayList<>();
     private long ID;
@@ -24,9 +26,11 @@ public class ProductService {
     public List<Product> findByAll(){
         return products;
     }
+
     public void saveProduct(Product product){
         product.setId(++ID);
         products.add(product);
+        log.info("Saving product", product);
     }
     public Product getById(long id){
         for(Product product : products){
@@ -42,7 +46,7 @@ public class ProductService {
                 pr.setCompany(product.getCompany());
                 pr.setModel(product.getModel());
                 pr.setPrice(product.getPrice());
-                return;
+                log.info("Update product ", id);
 
             }
         }
@@ -50,5 +54,6 @@ public class ProductService {
     }
     public void deleteProduct(Long id){
         products.removeIf(product -> product.getId().equals(id));
+        log.info("Delete product ", id);
     }
 }
