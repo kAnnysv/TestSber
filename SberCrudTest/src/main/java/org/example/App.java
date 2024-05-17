@@ -11,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class App {
     public static void main(String[] args) {
+
         ApplicationContext context = new AnnotationConfigApplicationContext("org/example");
         PhoneServiceImpl phoneService = context.getBean("phoneService", PhoneServiceImpl.class);
         PhoneCrudRepository phoneRepository =  context.getBean("jdbcTemplateRepository", PhoneCrudRepository.class);
