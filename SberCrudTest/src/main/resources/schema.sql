@@ -1,7 +1,7 @@
-drop schema if exists Product cascade;
-create schema if not exists Product;
+drop table if exists phone;
+create table if not exists phone;
 
-CREATE TABLE Product.phone (
+CREATE TABLE phone (
                            Id SERIAL PRIMARY KEY,
                            Company varchar(50) NOT NULL,
                            Model VARCHAR(50) NOT NULL,

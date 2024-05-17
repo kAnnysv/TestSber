@@ -16,14 +16,14 @@ public class PhoneRepositoryImpl implements PhoneCrudRepository{
     private NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
-    public PhoneRepositoryImpl(@Qualifier("driverManagerDataSource") DataSource dataSource) {
+    public PhoneRepositoryImpl(@Qualifier("driverManagerDataSource")DataSource dataSource) {
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
 
     @Override
     public Phone findById(Long id) {
-        Phone phone =jdbcTemplate.query("SELECT * FROM product.phone WHERE id=:id",
+        Phone phone =jdbcTemplate.query("SELECT * FROM phone WHERE id=:id",
                 new MapSqlParameterSource().addValue("id", id),
                 new BeanPropertyRowMapper<>(Phone.class)).stream().findFirst().orElse(null);
         return phone;
@@ -31,7 +31,7 @@ public class PhoneRepositoryImpl implements PhoneCrudRepository{
 
     @Override
     public List<Phone> findAll() {
-        List<Phone> phones = jdbcTemplate.query("SELECT * FROM product.phone",
+        List<Phone> phones = jdbcTemplate.query("SELECT * FROM phone",
                 new BeanPropertyRowMapper<>(Phone.class));
         return phones.isEmpty() ? null : phones;
 
@@ -39,7 +39,7 @@ public class PhoneRepositoryImpl implements PhoneCrudRepository{
 
     @Override
     public void save(Phone entity) {
-        jdbcTemplate.update("INSERT INTO product.phone(id, company, model, price) VALUES (:id, :company, :model, :price)",
+        jdbcTemplate.update("INSERT INTO phone(id, company, model, price) VALUES (:id, :company, :model, :price)",
         new MapSqlParameterSource()
                 .addValue("id",entity.getId())
                 .addValue("company", entity.getCompany())
@@ -50,7 +50,7 @@ public class PhoneRepositoryImpl implements PhoneCrudRepository{
 
     @Override
     public void update(Phone entity) {
-        jdbcTemplate.update("UPDATE product.user SET company = :company, model = :model, price = :price WHERE id = :id",
+        jdbcTemplate.update("UPDATE phone SET company = :company, model = :model, price = :price WHERE id = :id",
                 new MapSqlParameterSource()
                         .addValue("company", entity.getCompany())
                         .addValue("model", entity.getModel())
@@ -61,7 +61,7 @@ public class PhoneRepositoryImpl implements PhoneCrudRepository{
 
     @Override
     public void delete(Long id) {
-        jdbcTemplate.update("DELETE FROM product.phone WHERE id = :id",
+        jdbcTemplate.update("DELETE FROM phone WHERE id = :id",
                 new MapSqlParameterSource().addValue("id", id));
 
     }
