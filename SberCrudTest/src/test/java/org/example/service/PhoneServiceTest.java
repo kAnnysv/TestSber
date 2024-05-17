@@ -3,6 +3,7 @@ package org.example.service;
 import org.example.models.Phone;
 import org.example.repositories.CrudRepository;
 import org.example.repositories.PhoneCrudRepository;
+import org.example.repositories.PhoneRepositoryImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +18,7 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class PhoneServiceTest {
     @Mock
-    private PhoneServiceImpl repository;
+    private PhoneRepositoryImpl repository;
     @InjectMocks
     private PhoneServiceImpl phoneService;
 
@@ -34,7 +35,7 @@ public class PhoneServiceTest {
         Phone product = new Phone(9L, "test", "test", 100);
 
 
-        Mockito.when(repository.getAllPhones()).thenReturn(products);
+        Mockito.when(repository.findAll()).thenReturn(products);
 
 
         System.out.println(phoneService.getAllPhones().size());
@@ -47,7 +48,7 @@ public class PhoneServiceTest {
     }
     @Test
     public void testDelete() {
-//
+
     }
 
 
